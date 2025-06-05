@@ -1,0 +1,203 @@
+<!--
+You’re building a billing system for a mobile network provider. Customers can choose 
+one of four data plans, each with different features and prices: 
+Plan Code Plan Name 
+Price Data Limit 
+A 
+Basic Plan 
+$10 1 GB/month 
+B 
+Standard Plan $20 5 GB/month 
+C 
+Premium Plan $30 15 GB/month 
+D 
+Unlimited Plan $50 Unlimited 
+• Take user input as a plan code (A, B, C, D) 
+• Use a switch statement to: 
+• Display the plan name 
+• Show price and data limit 
+• Handle invalid input with a default case-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>JavaScript Operator</title>
+ <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    fieldset {
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    legend {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="name"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    #p1 {
+      max-width: 500px;
+      margin: 30px auto;
+      background-color: #ecf0f1;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 1.1em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+<h1>📶 Recharge Plan Details</h1>
+
+<table>
+<tr>
+<th>Plan Code</th>
+<th>Plan Name</th>
+<th>Price</th>
+<th>Data Limit</th>
+<th>Calls/SMS</th>
+</tr>
+<tr>
+<td>A</td>
+<td>Basic Plan</td>
+<td>$299</td>
+<td>2 GB/month</td>
+<td>Limited(100 SMS)</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Standard Plan</td>
+<td>$599</td>
+<td>5 GB/month</td>
+<td>Limited(300 SMS)</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Premium Plan</td>
+<td>$1099</td>
+<td>25 GB/month</td>
+<td>Limited(1000 SMS)</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Unlimited Plan</td>
+<td>$2025</td>
+<td>Unlimited/Month</td>
+<td>Unlimited</td>
+</tr>
+</table>
+<fieldset>
+<legend>Details</legend>
+<label for="name">Name:</label>
+<input type="name" id="name" name="name" placeholder="Enter the name"><br><br>
+<label for="tel">Contact:</label>
+<input type="tel" id="tel" name="tel" placeholder="Enter the Contact Number"><br><br>
+<label for="plan">Plan Code:</label>
+<input type="text" id="plan" name="plan" placeholder="Enter Your Plan Code">
+<button type="button" onclick="package()">Check Package</button>
+</fieldset>
+<p id="p1"></p>
+<script>
+function package()
+{
+let name=document.getElementById("name").value;
+let tel=document.getElementById("tel").value;
+let plan=document.getElementById("plan").value.toUpperCase();
+let result;
+switch (plan){
+	case "A":
+		result= "Basic Plan - $299 - 2GB/month - 100 SMS";
+		break;
+	case "B":
+		result= "Standard Plan - $599 - 5GB/month - 300 SMS";
+		break;
+	case "C":
+		result="Premium Plan - $1099 - 25GB/month - 1000 SMS";
+		break;
+	case "D":
+		result = "Unlimited Plan - $2025 - Unlimited Data - Unlimited Calls/SMS";
+		break;
+	default:
+		result = "Invalid Plan Code. Please enter A, B, C, or D.";
+	  }
+
+  document.getElementById("p1").innerHTML =
+    `<p>Customer: <strong>${name}</strong><br>Contact: <strong>${tel}</strong><br>Selected Package: ${result}</p>`;
+}
+</script>
+</body>
+</html>

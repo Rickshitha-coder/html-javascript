@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript</title>
+	<script>
+	function light_ON(){
+	document.getElementById('myimage').src='https://www.bulbamerica.com/cdn/shop/products/s14987_19f55a87-3f41-4a37-a0c6-3b010b274d4b.jpg?v=1649453376';
+	}
+	function light_OFF(){
+	document.getElementById('myimage').src='https://m.media-amazon.com/images/I/51IQ23SYLyL._AC_UF1000,1000_QL80_.jpg';
+	}
+	</script>
+</head>
+<body>
+	<h1> What Can JavaScript Do?</h1>
+	<p id="p1">JavaScript can change HTML content.</p>
+	<button type="button" onclick='document.getElementById("p1").innerHTML= "Content changed" '>Click Me!!</button>
+<br><br>
+<hr>
+
+<h2>What Can JavaScript Do?</h2>
+<p>In this case JavaScript changes the light on and off of an image.</p>
+
+<button onclick="light_ON()">Turn on the light</button>
+<img id="myimage" src="https://m.media-amazon.com/images/I/51IQ23SYLyL._AC_UF1000,1000_QL80_.jpg" style="width:50px">
+<button onclick="light_OFF()">Turn off the light</button>
+<script src="3 june.js">
+</script>
+<br>
+<br>
+<hr>
+
+<h2>Document write using script</h2>
+<script>
+document.write("Document writing using script function");
+</script>
+<br><br><hr>
+
+<h2>Document Write using button</h2>
+<p>Never call document.write after the document has finished loading.
+It will overwrite the whole document.</p>
+</p>
+<button type"button" onclick="document.write(5+6)">Click Me!!</button>
+<br><br><hr>
+
+<h2>Window Alert </h2>
+<p>It comes while opening the Window</p>
+<script>
+window.alert("Do You Want open the page");
+</script>
+<br><br>
+<hr>
+
+<h2>Activate Debugging</h2>
+<p>F12 on your keyboard will activate debugging.</p>
+<p>Then select "Console" in the debugger menu.</p>
+<p>Then click Run again.</p>
+<p>This message will not appear on the webpage itself, only in
+ the browser's console (you can open this using F12 or right-click > "Inspect" > "Console" tab in most browsers).</p>
+<script>
+console.log("Rickshi");
+</script>
+<br><br>
+<hr>
+
+
+<h2>JavaScript Statements</h2>
+
+<p>JavaScript statements are separated by semicolons.</p>
+
+<p id="p2"></p>
+
+<script>
+let a, b, c;
+a = 5;
+b = 6;
+c = a + b;
+document.getElementById("p2").innerHTML ="The sume is :" + c +" calucalted";
+</script>
+
+<p id="con"></p>
+<script>
+let  b, c;
+const a = 10;
+b = 6;
+c = a + b;
+document.getElementById("con").innerHTML ="The sume is :" + c +" calucalted";
+</script>
+<hr>
+<h2>JavaScript const</h2>
+
+<p>Declaring a constant array does NOT make the elements unchangeable:</p>
+<p id="arr"></p>
+<script>
+const names=["Rickshi","Anitha","Mirhtula"];
+names[0]="Thara";
+document.getElementById("arr").innerHTML= names;
+</script>
+
+</body>
+</html>

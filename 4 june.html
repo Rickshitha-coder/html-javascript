@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JavaScript Operator</title>
+</head>
+<body>
+<body>
+	    <h1>And Operator</h1>
+		<button type="button" onclick="checkAccess()">Check Access</button>
+		<p id="p1"></p>
+	<script>
+	function checkAccess()
+	{
+		let age=15;
+		let allowed=true;
+		if (age>=18 && allowed)
+		{
+			document.getElementById("p1").innerText = "Access Granted";
+		}
+		else
+		{
+			document.getElementById("p1").innerText = "Access Denied";
+		}
+	}
+	</script>
+<hr>
+<h2>Or Operator</h2>
+<p id="p2"></p>
+<script>
+let age2 = 18;
+let allowed2 = false;
+
+if (age2 >= 18 || allowed2) {
+  document.getElementById("p2").innerText = "Access Granted";
+} else {
+  document.getElementById("p2").innerText = "Access Denied";
+}
+</script>
+<hr>
+<h2>NOt Operator</h2>
+<p id="p3"></p>
+<script>
+let age3 = 18;
+let allowed3 = false;
+
+if (!(age3 >= 18)) {
+  document.getElementById("p3").innerText = "Access Granted";
+} else {
+  document.getElementById("p3").innerText = "Access Denied";
+}
+document.write(typeof age3);
+</script>
+<hr>
+<h2>Enter a number (0-6) to get the day of the week</h2>
+<input type="number" id="dayInput" placeholder="Enter 0-6" min="0" max="6">
+<button type="button" onclick="checkDay()">Show Day</button>
+<p id="p4"></p>
+<script>
+function checkDay() {
+      const dayNumber = parseInt(document.getElementById("dayInput").value);
+      let dayName;
+
+      switch (dayNumber) {
+        case 0:
+          dayName = "Sunday";
+          break;
+        case 1:
+          dayName = "Monday";
+          break;
+        case 2:
+          dayName = "Tuesday";
+          break;
+        case 3:
+          dayName = "Wednesday";
+          break;
+        case 4:
+          dayName = "Thursday";
+          break;
+        case 5:
+          dayName = "Friday";
+          break;
+        case 6:
+          dayName = "Saturday";
+          break;
+        default:
+          dayName = "Invalid input! Please enter a number between 0 and 6.";
+      }
+
+      document.getElementById("p4").innerText = dayName;
+    }
+  </script>
+<hr>
+<p id="p5"></p>
+<button type="button" onclick="calculate()">calculate</button>
+<script>
+function calculate()
+{
+let n1=parseInt(prompt("Enter a number:"));
+let n2=parseInt(prompt("Enter a another number:"));
+let operation=prompt("Enter the operation '+' Add '-' Subtract '*' Mulplication");
+let result;
+switch (operation)
+{
+case '+':
+	result=n1+n2;
+	break;
+case '-':
+	result=n1-n2;
+	break;
+case '*':
+	result=n1*n2;
+	break;
+default:
+	result="Invaild Input";
+}
+document.getElementById("p5").innerText= result;
+}
+</script>
+
+<hr>
+
+<label for="1n">Enter the First Number</label>
+<input type="number" id="1n" placeholder="Enter First Number">
+<br><br>
+
+<label for="2n">Enter the Second Number</label>
+<input type="number" id="2n" placeholder="Enter Second Number">
+<br><br>
+
+<label for="ol">Enter the Operation</label>
+<input type="text" id="ol" placeholder="+, -, *">
+<br><br>
+
+<p id="p6"></p>
+<button type="button" onclick="cal()">Calculate</button>
+
+<script>
+function cal() {
+    let n1 = parseInt(document.getElementById("1n").value);
+    let n2 = parseInt(document.getElementById("2n").value);
+    let operation = document.getElementById("ol").value;
+    let result;
+
+    switch (operation) {
+        case '+':
+            result = n1 + n2;
+            break;
+        case '-':
+            result = n1 - n2;
+            break;
+        case '*':
+            result = n1 * n2;
+            break;
+        default:
+            result = "Invalid Input";
+    }
+
+    document.getElementById("p6").textContent = result;
+}
+</script>
+<hr>
+<h2>JavaScript For Loop</h2>
+
+<p id="p7"></p>
+
+<script>
+const cars = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
+
+let text = "";
+for (let i = 0; i < cars.length; i++) {
+  text += cars[i] + "<br>";
+}
+
+document.getElementById("p7").innerHTML = text;
+</script>
+<p>Explanation<br>
+<pre>
+cars = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"]
+let i = 0; i lesserthan cars.length; i++
+From the example above, you can read:
+Expression 1 sets a variable before the loop starts (let i = 0).
+Expression 2 defines the condition for the loop to run (i must be less than 5).
+Expression 3 increases a value (i++) each time the code block in the loop has been executed.
+</pre></p>
+<hr>
+
+<p id="p8"></p>
+<button type="button" onclick="dic()">Click</button>
+<script>
+function dic()
+{
+let student={'name':"Rickshi",'age':18};
+for (let key in student)
+{
+document.write(key +":" +student[key]+"<br>");
+}
+}
+</script>
+
+<hr>
+<h2>The For Of Loop</h2>
+<p>The JavaScript for of statement loops through the values of an iterable object.</p>
+<button type ="button" onclick="list()">click</button>
+<script>
+function list()
+{
+let student=["Rickshi","Durga"];
+for (let element of student)
+{
+document.write(element + "<br>");
+}
+let st = [
+  {name: "Rickshi", age: 18},
+  {name: "Durga", age: 18}
+];
+
+for (let student of st)
+{document.write(student.name + " age is"+student.age+" Years Old<br>");
+}
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

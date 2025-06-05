@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Access Control</title>
+ <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    fieldset {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      background-color: #28a745;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #val {
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .denied {
+      font-weight: bold;
+      color: #dc3545;
+    }
+
+    p {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔐 Access Control System</h1>
+
+  <fieldset>
+    <legend>👤 Employee Details</legend>
+    <label for="name">Name of The Employee:</label>
+    <input type="text" name="name" id="name" placeholder="Enter the Employee Name">
+
+    <label for="no">ID of the Employee:</label>
+    <input type="number" name="no" id="no" placeholder="Enter the Employee ID">
+
+    <label for="num">Contact of the Employee:</label>
+    <input type="tel" name="num" id="num" placeholder="Enter the Contact Number">
+  </fieldset>
+
+  <fieldset>
+    <legend>✅ Access Eligibility</legend>
+
+    <label><input type="checkbox" id="hasValidID">Do you have a valid ID card?</label>
+    <label><input type="checkbox" id="isFullTime">Are you a full-time employee?</label>
+    <label><input type="checkbox" id="hasSpecialAccess">Do you have special access clearance?</label>
+    <label><input type="checkbox" id="isSuspended">Are you currently suspended?</label>
+  </fieldset>
+
+  <button type="button" onclick="validate()">Click Here to Check Your Eligibility</button>
+
+  <div id="val"></div>
+
+  <script>
+    function validate() {
+      let name = document.getElementById("name").value;
+      let no = document.getElementById("no").value;
+      let num = document.getElementById("num").value;
+
+      let hasValidID = document.getElementById("hasValidID").checked;
+      let isFullTime = document.getElementById("isFullTime").checked;
+      let hasSpecialAccess = document.getElementById("hasSpecialAccess").checked;
+      let isSuspended = document.getElementById("isSuspended").checked;
+
+      let result;
+      if (hasValidID && (isFullTime || hasSpecialAccess) && !isSuspended) {
+        result = "<span class='highlight'>✅ Permission Granted</span>";
+      } else {
+        result = "<span class='denied'>❌ Permission Denied</span>";
+      }
+
+      document.getElementById("val").innerHTML = 
+        `<p>
+          Employee Name: <span class="highlight">${name}</span><br>
+          Employee ID: <span class="highlight">${no}</span><br>
+          Contact: <span class="highlight">${num}</span><br>
+          Access Status: ${result}
+        </p>`;
+    }
+  </script>
+
+</body>
+</html>

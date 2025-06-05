@@ -1,0 +1,143 @@
+<!--
+1. You are building a simple script for an online store. The store offers discounts based on the 
+total amount a customer spends. You need to create a script that calculates the final price 
+after applying discounts. (include images / background colours ) 
+Requirements: 
+Declare Variables for: 
+customerName 
+cartTotal 
+discount 
+f
+ inalPrice 
+Assign Values: 
+customerName = "" 
+cartTotal = 120 (this value can be changed to test different outcomes) 
+Discount Rules (Use if statements and comparison operators): 
+If cart total is greater than or equal to 100, apply a 20% discount. 
+If cart total is greater than or equal to 50 but less than 100, apply a 10% discount. 
+Otherwise, no discount. 
+Calculate Final Price 
+Print the summary 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Store - Discount Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7h-1mWeSM9p6sdXzYhEzfkQEdMVnroHr-xw&s');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: #333;
+      padding: 40px;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 20px 30px;
+      border-radius: 10px;
+      width: 400px;
+      margin-left: 700px;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0077cc;
+    }
+
+    .summary {
+      margin-top: 20px;
+      font-size: 1.1em;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #2e8b57;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    #summary {
+      margin-left: 700px;
+	  margin-top:20px;
+      width: 430px;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.1em;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+<h1 style="text-align:center; margin-top:0;">Happy Shoping</h1>
+  <div class="container">
+    <h2>🛒 Discount Summary</h2>
+
+    <label for="name">Customer Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label for="cartTotal">Cart Total ($):</label>
+    <input type="number" id="cartTotal" placeholder="Enter your cart total">
+
+    <button onclick="calculateDiscount()">Calculate Final Price</button>
+  </div>
+
+  <div id="summary"></div>
+
+  <script>
+    function calculateDiscount() {
+      let customerName = document.getElementById("name").value;
+      let cartTotal = parseFloat(document.getElementById("cartTotal").value);
+      let discount = 0;
+
+
+      // Discount rules
+      if (cartTotal >= 100) {
+        discount = 20;
+      } else if (cartTotal >= 50) {
+        discount = 10;
+      }
+
+      // Final calculation
+      let finalPrice = cartTotal - ((discount / 100) * cartTotal);
+
+      // Output
+      document.getElementById("summary").innerHTML = `
+        <p><span class="highlight">${customerName}</span>, your original cart total was <span class="highlight">$${cartTotal.toFixed(2)}</span>.</p>
+        <p>You received a discount of <span class="highlight">${discount}%</span>.</p>
+        <p>Your final amount to pay is <span class="highlight">$${finalPrice.toFixed(2)}</span>.</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>

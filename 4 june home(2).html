@@ -1,0 +1,143 @@
+<!--
+ You have an array of product objects, each with a name and price: 
+Write a JavaScript for loop that: 
+1. Loops through all products. 
+2. Counts how many products cost more than Rs.50. 
+3. Display the names of those products to the webpage. 
+4. Displays the total count of products costing more than Rs.50.-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Price Filter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin-bottom: 20px;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    fieldset {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #fff;
+      border: 2px solid #2980b9;
+      border-radius: 8px;
+    }
+    input[type="number"] {
+      padding: 8px;
+      width: 150px;
+    }
+    button {
+      padding: 8px 15px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #output {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Product List</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Price (Rs.)</th>
+      </tr>
+    </thead>
+    <tbody id="productTable">
+      <!-- Table rows will be added by JS -->
+    </tbody>
+  </table>
+
+  <fieldset>
+    <legend>Filter Products by Price</legend>
+    <label for="priceInput">Show products priced above:</label>
+    <input type="number" id="priceInput" placeholder="Enter amount">
+    <button onclick="filterProducts()">Filter</button>
+  </fieldset>
+
+  <h3>Filtered Products</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Price (Rs.)</th>
+      </tr>
+    </thead>
+    <tbody id="filteredTable"></tbody>
+  </table>
+
+  <p id="output"></p>
+
+<script>
+  const products = [
+    { name: "Pen", price: 25 },
+    { name: "Notebook", price: 55 },
+    { name: "Pencil", price: 15 },
+    { name: "Bag", price: 450 },
+    { name: "Eraser", price: 10 },
+    { name: "Bottle", price: 120 }
+  ];
+
+  // Show all products in the main table using for...of
+  const productTable = document.getElementById("productTable");
+  for (let product of products) {
+    productTable.innerHTML += `<tr><td>${product.name}</td><td>${product.price}</td></tr>`;
+  }
+
+  function filterProducts() {
+    const minPrice = parseFloat(document.getElementById("priceInput").value);
+    let filtered = []; // Array to hold filtered products
+
+    // Filter products using for...of
+    for (let product of products) {
+      if (product.price > minPrice) {
+        filtered.push(product);
+      }
+    }
+
+    // Build the HTML for the filtered product rows
+    let filteredHTML = "";
+    for (let item of filtered) {
+      filteredHTML += `<tr><td>${item.name}</td><td>${item.price}</td></tr>`;
+    }
+
+    // Display the filtered table
+    document.getElementById("filteredTable").innerHTML = filteredHTML;
+
+    // Display count
+    document.getElementById("output").innerText =
+      `Total products above Rs. ${minPrice}: ${filtered.length}`;
+  }
+</script>
+
+
+</body>
+</html>

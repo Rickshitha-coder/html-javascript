@@ -1,0 +1,127 @@
+<!--JavaScript: Create a simple simulation of a hospital waiting room using basic array 
+operations: 
+Patients are added to the end of the queue when they arrive. 
+The first patient is removed when they are called to the doctor. 
+Emergency patients arrive and are placed at the front. 
+Patients may leave the queue from the end (e.g., if they get tired of waiting). 
+Note: Use push(), pop(),shift() and unshift() methods for possible operations. 
+Also, display the current array after every operation. 
+Note: Use bootstrap to style the content of the page.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hospital Queue</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #f8f9fa, #e3f2fd);
+    }
+    .card-custom {
+      background: #ffffffcc;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+    .btn i {
+      margin-right: 5px;
+    }
+    #message {
+      min-height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container my-5">
+  <div class="card card-custom">
+    <div class="text-center mb-4">
+      <h2><i class="bi bi-hospital-fill text-danger"></i> Hospital Waiting Room</h2>
+      <p class="text-muted">Manage the flow of patients easily</p>
+    </div>
+
+    <input type="text" id="patientName" class="form-control mb-3" placeholder="Enter patient name" />
+
+    <div class="d-grid gap-2 d-md-flex justify-content-center mb-3">
+      <button class="btn btn-primary" onclick="addPatient()"><i class="bi bi-person-plus-fill"></i>Add Patient</button>
+      <button class="btn btn-success" onclick="callPatient()"><i class="bi bi-telephone-outbound-fill"></i>Call Patient</button>
+      <button class="btn btn-danger" onclick="emergencyPatient()"><i class="bi bi-exclamation-triangle-fill"></i>Emergency</button>
+      <button class="btn btn-warning" onclick="patientLeaves()"><i class="bi bi-person-dash-fill"></i>Patient Leaves</button>
+    </div>
+
+    <h5 class="mb-2"><i class="bi bi-list-ul"></i> Current Queue:</h5>
+    <ul id="queueList" class="list-group mb-3"></ul>
+
+    <div id="message" class="text-center fw-semibold fs-5"></div>
+  </div>
+</div>
+
+<script>
+  let waitingRoom = [];
+
+  function showMessage(text, color) {
+    document.getElementById("message").innerHTML = `<p class="text-${color}">${text}</p>`;
+  }
+
+  function updateQueue() {
+    const queue = document.getElementById("queueList");
+    queue.innerHTML = ""; //empty
+    if (waitingRoom.length === 0) { // if its is empty means it shows No pateints waiting
+      queue.innerHTML = '<li class="list-group-item text-muted">No patients waiting</li>';
+    } else { //some in Queuelist
+      for (let i = 0; i < waitingRoom.length; i++) {
+        queue.innerHTML += `<li class="list-group-item">${i + 1}. ${waitingRoom[i]}</li>`;
+      }
+    }
+  }
+
+  function addPatient() {
+    const name = document.getElementById("patientName").value.trim();
+    if (name === "") { // if its is empty means it shows Please Enter a name
+      showMessage("Please enter a name.", "danger");
+    } else { //if we enter the name and click add button means it show patiend added to the queue
+      waitingRoom.push(name); //append
+      showMessage(`${name} added to end of queue.`, "primary");
+      document.getElementById("patientName").value = "";
+      updateQueue();
+    }
+  }
+
+  function callPatient() {
+    if (waitingRoom.length === 0) { //if it is emoty means it show no patient to call
+      showMessage("No patients to call.", "warning");
+    } else { //list of pateints
+      const name = waitingRoom.shift(); //it removes the first patient
+      showMessage(`Calling ${name} to the doctor.`, "success");
+      updateQueue();
+    }
+  }
+
+  function emergencyPatient() {
+    const name = document.getElementById("patientName").value.trim();
+    if (name === "") { //if it is empty it shows please enter a name
+      showMessage("Please enter a name.", "danger");
+    } else { //list of patients
+      waitingRoom.unshift(name); //it addedd to tha front of list
+      showMessage(`Emergency! ${name} added to front of queue.`, "danger");
+      document.getElementById("patientName").value = "";
+      updateQueue();
+    }
+  }
+
+  function patientLeaves() {
+    if (waitingRoom.length === 0) {
+      showMessage("No patients to leave.", "warning");
+    } else { //list of patients
+      const name = waitingRoom.pop(); //it removes the last element in the list
+      showMessage(`${name} left the queue.`, "warning");
+      updateQueue();
+    }
+  }
+
+  updateQueue(); // Show initial empty state
+</script>
+
+</body>
+</html>

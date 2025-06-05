@@ -1,0 +1,106 @@
+<!--
+ You're building a simple travel webpage where users click a button to reveal a travel 
+destination, its description, and change the displayed image accordingly. (Use 
+JavaScript to dynamically change the text and image when the button is clicked.) 
+Use a paragraph element (<p>) to show a destination description. 
+Use an image element (<img>) to display the related destination image. 
+Use a button (<button>) to trigger the action. 
+Use innerHTML and innerText to update the content.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Travel Destinations</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h1 {
+      color: #00695c;
+      margin-bottom: 30px;
+    }
+
+    .box {
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .box h2 {
+      color: #00796b;
+    }
+
+    .btn {
+      width: 100%;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.03);
+    }
+
+    #dest-img {
+      border-radius: 10px;
+      max-height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="text-center">Travel Destination</h1>
+
+  <div class="container box" style="max-width: 400px;">
+    <h2 id="dest-title">Destinations</h2>
+
+    <p id="dest-desc">
+      A popular travel destination can be a city, country, or region known for its cultural or natural attractions. 
+      Examples include Goa, Paris, Barcelona, and Delhi.
+    </p>
+
+    <img id="dest-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDg26uGDIYdcezFCNpbGS_9Gc1capwRYFG5w&s" class="img-fluid mb-3" alt="Destination image">
+
+    <button type="button" class="btn btn-primary mb-2" onclick="showSummer()">☀️ Summer Destinations</button>
+    <button type="button" class="btn btn-info mb-2" onclick="showRainy()">🌧️ Rainy Destinations</button>
+    <button type="button" class="btn btn-secondary" onclick="showHome()">🏠 Back to Home</button>
+  </div>
+
+  <script>
+    function showSummer() {
+      document.getElementById("dest-title").innerText = "Summer Destinations";
+      document.getElementById("dest-desc").innerText =
+        "For a summer getaway, consider hill stations like Manali, Shimla, or Ooty for cooler temperatures and scenic beauty. " +
+        "Alternatively, explore coastal regions like the Andaman and Nicobar Islands for beach holidays. " +
+        "If adventure is your preference, Ladakh and Kashmir offer stunning landscapes and outdoor activities";
+      
+      document.getElementById("dest-img").src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxbRGfDufPQhnSIEPNqVIqV5AnrVf-0R1aAQ&s";
+      document.getElementById("dest-img").alt = "Summer Destination";
+    }
+
+    function showRainy() {
+      document.getElementById("dest-title").innerText = "Rainy Destinations";
+      document.getElementById("dest-desc").innerText =
+        "Rainy season destinations offer lush greenery, waterfalls, and tranquility. " +
+        "Top places include Kodaikanal, Munnar, and Coorg, as well as coastal regions like Goa and the Andaman Islands.";
+      
+      document.getElementById("dest-img").src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFj-mmAiZR-ZBpsWzsylqeHpNwGWwsZ35o2g&s";
+      document.getElementById("dest-img").alt = "Rainy Destination";
+    }
+
+    function showHome() {
+      document.getElementById("dest-title").innerText = "Destinations";
+      document.getElementById("dest-desc").innerText =
+        "A popular travel destination can be a city, country, or region known for its cultural or natural attractions. " +
+        "Examples include Goa, Paris, Barcelona, and Delhi.";
+      
+      document.getElementById("dest-img").src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDg26uGDIYdcezFCNpbGS_9Gc1capwRYFG5w&s";
+      document.getElementById("dest-img").alt = "Destination image";
+    }
+  </script>
+</body>
+</html>

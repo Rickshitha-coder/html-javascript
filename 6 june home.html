@@ -1,0 +1,246 @@
+<!--Date : 6-6-25 
+1. You are building a simple e-commerce dashboard. You are given an array of product objects. Each 
+product has the following structure: 
+Requirement :  
+• product id 
+• name 
+• category 
+• stock_availability count. 
+Task: 
+List available products (in stock). 
+Use .filter() to return all products where stock > 0. 
+Get product names only. 
+Use .map() to return an array of just the product names. 
+Find the most expensive product. 
+Use .reduce() to return the product with the highest price. 
+Check if any product is out of stock. 
+Use .some() to check if there’s any product with stock === 0. 
+Check if all products are priced below $2000. 
+Use .every() to verify that all product prices are under Rs.2000. 
+Create a comma-separated string of product names. 
+Use .map() + .join(). 
+Group products by category. 
+Use .reduce() to group products into an object by category. 
+Create a list of names of in-stock Electronics products, sorted by price (ascending). 
+Use .filter(), .sort(), .map() together. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>E-commerce Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card {
+      margin-bottom: 20px;
+    }
+    .card-header i {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center text-primary mb-5"><i class="bi bi-bar-chart-fill"></i> E-commerce Dashboard</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card shadow border-success">
+          <div class="card-header bg-success text-white"><i class="bi bi-box-seam"></i> Available Products</div>
+          <div class="card-body"><button class="btn btn-outline-success mb-2" onclick="toggle('p1')">
+        <i class="bi bi-eye"></i> Show/Hide Data
+      </button><p id="p1" class="d-none mb-0"></p></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow border-info">
+          <div class="card-header bg-info text-white"><i class="bi bi-tag-fill"></i> Product Names</div>
+          <div class="card-body">
+		  <button class="btn btn-outline-success mb-2" onclick="toggle('p2')">
+        <i class="bi bi-eye"></i> Show/Hide Data
+      </button><p id="p2" class="d-none mb-0"></p></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow border-warning">
+          <div class="card-header bg-warning text-dark"><i class="bi bi-exclamation-triangle-fill"></i> Out of Stock Info</div>
+          <div class="card-body">		  <button class="btn btn-outline-success mb-2" onclick="toggle('p3')">
+        <i class="bi bi-eye"></i> Show/Hide Data
+      </button><p id="p3" class="d-none mb-0"></p></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow border-secondary">
+          <div class="card-header bg-secondary text-white"><i class="bi bi-currency-rupee"></i> Price Under ₹2000 Check</div>
+          <div class="card-body">		  <button class="btn btn-outline-success mb-2" onclick="toggle('p4')">
+        <i class="bi bi-eye"></i> Show/Hide Data
+      </button><p id="p4" class="d-none mb-0"></p></div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card shadow border-dark">
+          <div class="card-header bg-dark text-white"><i class="bi bi-list-task"></i> Comma-Separated Product Names</div>
+          <div class="card-body">		  <button class="btn btn-outline-success mb-2" onclick="toggle('p5')">
+        <i class="bi bi-eye"></i> Show/Hide Data
+      </button><p id="p5" class="d-none mb-0"></p></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow border-primary">
+          <div class="card-header bg-primary text-white"><i class="bi bi-diagram-3-fill"></i> Grouped by Category</div>
+          <div class="card-body">		  <button class="btn btn-outline-success mb-2" onclick="toggle('p6')">
+        <i class="bi bi-eye"></i> Show/Hide Data
+      </button><p id="p6" class="d-none mb-0"></p></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow border-danger">
+          <div class="card-header bg-danger text-white"><i class="bi bi-eye-fill"></i> Sorted Eye Care Products</div>
+          <div class="card-body">		  <button class="btn btn-outline-success mb-2" onclick="toggle('p7')">
+        <i class="bi bi-eye"></i> Show/Hide Data
+      </button><p id="p7" class="d-none mb-0"></p></div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card shadow border-success">
+          <div class="card-header bg-success text-white"><i class="bi bi-gem"></i> Most Expensive Product</div>
+          <div class="card-body">		  <button class="btn btn-outline-success mb-2" onclick="toggle('p8')">
+        <i class="bi bi-eye"></i> Show/Hide Data
+      </button><p id="p8" class="d-none mb-0"></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Your original script (unchanged) -->
+  <script>
+    const products = [
+      { id: 101, name: "Lipstick", category: "Face Care", stock: 5, price: 400 },
+      { id: 102, name: "Serum", category: "Hair Care", stock: 15, price: 390 },
+      { id: 103, name: "Hair Dyer", category: "Hair Care", stock: 10, price: 3590 },
+      { id: 104, name: "Kajal", category: "Eye Care", stock: 25, price: 299 },
+      { id: 105, name: "Eye Linear", category: "Eye Care", stock: 8, price: 590 },
+      { id: 106, name: "Foundation", category: "Face Care", stock: 24, price: 700 },
+      { id: 107, name: "Mostizure", category: "Skin Care", stock: 18, price: 499 },
+      { id: 108, name: "All In One Beauty", category: "Makeup Set", stock: 4, price: 5890 },
+      { id: 109, name: "Sun Screen", category: "Skin Care", stock: 13, price: 690 },
+      { id: 110, name: "Body Lotion", category: "Skin Care", stock: 0, price: 300 },
+      { id: 111, name: "Mascara", category: "Eye Care", stock: 4, price: 459 },
+    ];
+
+    const availableproducts = products.filter(product => product.stock > 0);
+    let stock = "";
+    for (let product of availableproducts) {
+      stock += "ID:" + product.id + " ,Name:" + product.name + " ,Category:" + product.category + " ,Stock Availble:" + product.stock + " ,Price:" + product.price + "<br><br>";
+    }
+    document.getElementById("p1").innerHTML = stock;
+    console.log(stock);
+	
+  function toggle(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle("d-none");
+  }
+
+
+
+    const availbleproductnames = products.map(product => product.name);
+    let stockname = "";
+    for (let product of products) {
+      stockname += "ID:" + product.id + " ,Name:" + product.name + "<br><br>";
+    }
+    document.getElementById("p2").innerHTML = stockname;
+    console.log(availbleproductnames);
+
+    const outofstock = products.some(product => product.stock === 0);
+    let zerostock = "";
+    if (outofstock) {
+      zerostock = "Some products are out of stock.";
+    } else {
+      zerostock = "All products are in stock.";
+    }
+    document.getElementById("p3").innerHTML = zerostock;
+    console.log(outofstock);
+
+
+
+
+
+
+    const allunder2000 = products.every(product => product.price < 2000);
+    console.log(allunder2000);
+    let all2000 = "";
+    if (allunder2000) {
+      all2000 = "All products are avaliable under 2000 rupees.";
+    } else {
+      all2000 = "Some products are availble under 2000 rupees";
+    }
+    document.getElementById("p4").innerHTML = all2000;
+
+
+
+
+
+
+
+    const productname = products.map(product => product.name).join(',');
+    console.log(productname)
+    document.getElementById("p5").innerHTML = productname;
+
+
+
+
+
+
+
+    const groupedbycategory = products.reduce((grouped, product) => {
+      const category = product.category;
+      if (!grouped[category]) {
+        grouped[category] = [];
+      }
+      grouped[category].push(product);
+      return grouped;
+    }, {});
+    console.log(groupedbycategory);
+    let categoryhtml = ""
+    for (let cate in groupedbycategory) {
+      categoryhtml += cate + "<br><br>";
+    }
+    document.getElementById("p6").innerHTML = categoryhtml;
+
+
+
+
+
+    const eyecaresorted = products
+      .filter(product => product.category === "Eye Care" && product.stock > 0)
+      .sort((a, b) => a.price - b.price)
+      .map(product => product.name);
+    console.log(eyecaresorted);
+    document.getElementById("p7").innerHTML = eyecaresorted + "<br><br>";
+
+
+
+
+
+
+    const mostexpensive = products.reduce((max, product) =>
+      product.price > max.price ? product : max);
+    console.log(mostexpensive);
+    document.getElementById("p8").innerHTML = "Most Expensive Product :" + mostexpensive.name + " ,and Price is :" + mostexpensive.price;
+  </script>
+</body>
+</html>
+

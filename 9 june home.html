@@ -1,0 +1,123 @@
+<!--You’re developing an admin dashboard for an online bookstore. The HTML layout 
+includes sections like book listings, categories, and a status panel. 
+Write JavaScript to do the following: 
+a) Get the title of the dashboard using its id and log it. 
+b) Get all book items using their tag name and/or class name, and log the total count. 
+c) Get all status messages using their class name and print each message. 
+d) Change the text color of all <li> elements to blue. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Theatre Admin Dashboard</title>
+
+  <!-- ✅ Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: darkred;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      margin: 5px 0;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="dashboard-title">🎬 Theatre Admin Dashboard - Now Showing</h1>
+
+  <div class="container text-center mb-4">
+    <button onclick="getDashboardTitle()" class="btn btn-primary m-2">a) Today's Movie</button>
+    <button onclick="countMovies()" class="btn btn-success m-2">b) Today Available Movie Count</button>
+    <button onclick="printStatusMessages()" class="btn btn-info m-2">c) Booking Details</button>
+    <button onclick="colorListItems()" class="btn btn-warning m-2">d) Color All List Items Blue</button>
+  </div>
+
+  <div class="container">
+    <!-- Movie Listings -->
+    <div class="card mb-4">
+      <div class="card-header bg-danger text-white">Today’s Movies</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item movie-item">Leo</li>
+        <li class="list-group-item movie-item">Jailer</li>
+        <li class="list-group-item movie-item">Thar</li>
+        <li class="list-group-item movie-item">Vikram</li>
+      </ul>
+    </div>
+
+    <!-- Genres -->
+    <div class="card mb-4">
+      <div class="card-header bg-dark text-white">Genres</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Action</li>
+        <li class="list-group-item">Drama</li>
+        <li class="list-group-item">Comedy</li>
+        <li class="list-group-item">Thriller</li>
+      </ul>
+    </div>
+
+    <!-- Status Panel -->
+    <div class="card">
+      <div class="card-header bg-secondary text-white">Status Panel</div>
+      <div class="card-body">
+        <p class="status-message text-success">✔ Leo is running housefull!</p>
+        <p class="status-message text-success">✔ Online bookings open for Thar.</p>
+        <p class="status-message text-success">✔ New release coming soon!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // a) Show the dashboard title
+    function getDashboardTitle() {
+      const title = document.getElementById('dashboard-title');
+      console.log("Dashboard Title:", title.textContent);
+      alert("Today's Movie is: Thug Life");
+    }
+
+    // b) Count the total number of movies
+    function countMovies() {
+      const movies = document.getElementsByClassName('movie-item');
+      console.log("Total Movies Today:", movies.length);
+      alert("Total Movies Today: " + movies.length);
+    }
+
+    // c) Print all status messages
+    function printStatusMessages() {
+      const messages = document.getElementsByClassName('status-message');
+      console.log("Status Messages:");
+      let allMessages = "";
+      for (let i = 0; i < messages.length; i++) {
+        console.log("-", messages[i].textContent);
+        allMessages += "- " + messages[i].textContent + "\n";
+      }
+      alert("Status Messages:\n" + allMessages);
+    }
+
+    // d) Change <li> color to blue
+    function colorListItems() {
+      const listItems = document.querySelectorAll('li');
+      listItems.forEach(item => {
+        item.style.color = 'blue';
+      });
+      console.log("All list items are now blue.");
+      alert("All list items are now blue.");
+    }
+  </script>
+</body>
+</html>

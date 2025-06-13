@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS animation JavaScript</title>
+  <style>
+    /* Animation Keyframes */
+    @keyframes divAnimate {
+      from { left: 0px; }
+      to { left: 200px; }
+    }
+
+    @keyframes divNewAnimate {
+      from { top: 0px; }
+      to { top: 100px; }
+    }
+
+    #divId2 {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      position: relative;
+      animation: divAnimate 2s infinite;
+    }
+
+    #divId {
+      width: 120px;
+      height: 300px;
+      border: 1px solid blue;
+      display: flex;
+      align-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Changing HTML Style</h2>
+  <p>To change the style of an HTML element, use this syntax: <br>
+     <code>document.getElementById(id).style.property = new style</code></p>
+  <p id="p9">Changing HTML style</p>
+
+  <script>
+    document.getElementById("p9").style.color = "red";
+  </script>
+
+  <hr>
+
+  <h2>Color Change when clicking the button</h2>
+  <p id="p10">When click the button it changes the color</p>
+  <button type="button" onclick="document.getElementById('p10').style.color='blue'">See the color</button>
+
+  <hr>
+
+  <h2>Alignment</h2>
+  <div id="divId">
+    <div style="background-color: red;">Division 1</div>
+    <div style="background-color: yellow;">Division 2</div>
+    <div style="background-color: green;">Division 3</div>
+  </div>
+  <button type="button" onclick="align()">Click to See the Change</button>
+
+  <script>
+    function align() {
+      document.getElementById("divId").style.alignContent = "stretch"; // Try also: flex-end, space-around, space-between
+    }
+  </script>
+
+  <hr>
+
+  <h2>Changing the Style Using Animation</h2>
+  <img id="divId2" src="https://images.unsplash.com/photo-1458929526027-052f5d6a3c5e?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zmxvd2V8ZW58MHx8MHx8fDA%3D"><br>
+  <button type="button" onclick="ani2()">Click to see the changes</button>
+
+  <script>
+    function ani2() {
+      document.getElementById("divId2").style.animation = "divNewAnimate 3s 2";
+	  document.getElementById("divId2").style.animationDelay = "1s"; //delay for specific seconds
+	    document.getElementById("divId2").style.animationDirection = "reverse"; // it animate back to top
+		 document.getElementById("divId2").style.animationDuration = "1s"; //duration for the animation
+		  document.getElementById("divId2").style.animationIterationCount = "2";  //it only animate 2 times alone
+    }
+  </script>
+  
+  <hr>
+  
+  <h2>The backgroundColor Property</h2>
+
+<button type="button" onclick="back()">Set background color</button>
+
+<script>
+function back() {
+  document.body.style.backgroundImage ="url('https://images.unsplash.com/photo-1458929526027-052f5d6a3c5e?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zmxvd2V8ZW58MHx8MHx8fDA%3D') ";
+	document.body.style.backgroundPosition="top right"; 
+	document.style.backgroundSize = "60px 120px"
+}
+</script>
+
+
+</body>
+</html>

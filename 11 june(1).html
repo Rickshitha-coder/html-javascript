@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Key Events Example</title>
+    <style>
+        /* Style for the movable yellow square */
+        #div1 {
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            border: 1px dashed black;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: Key Up and Key Down Logging -->
+    <h2>Key up and key down</h2>
+    <input type="text" id="textField" placeholder="Enter a key">
+
+    <script>
+        // Get reference to the input field
+        const input = document.getElementById("textField");
+
+        // Log key when it is pressed down
+        input.addEventListener('keydown', function(event) {
+            console.log('Key down:', event.key);
+        });
+
+        // Log key when it is released
+        input.addEventListener('keyup', function(event) {
+            console.log('Key up:', event.key);
+        });
+    </script>
+<hr><hr>
+    <!-- Section 2: Ctrl + S Save Detection -->
+    <h2>Ctrl + S</h2>
+
+    <script>
+        // Detect Ctrl + S and show alert, prevent browser's save behavior
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 's') {
+                event.preventDefault(); // Prevent browser's default save
+                alert("Saved"); // Show custom alert
+            }
+        });
+    </script>
+
+    <br><hr>
+
+    <!-- Section 3: Movable Div with Arrow Keys -->
+    <div id="div1"></div>
+
+    <script>
+        // Get the div element
+        const divElement = document.getElementById("div1");
+
+        // Initial position of the box
+        let topPosition = 100;
+        let leftPosition = 100;
+
+        // Move the box based on arrow key input
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "ArrowUp") {
+                topPosition -= 10; // Move up
+            } else if (event.key === "ArrowDown") {
+                topPosition += 10; // Move down
+            } else if (event.key === "ArrowLeft") {
+                leftPosition -= 10; // Move left
+            } else if (event.key === "ArrowRight") {
+                leftPosition += 10; // Move right
+            }
+
+            // Update the position
+            divElement.style.top = topPosition + 'px';
+            divElement.style.left = leftPosition + 'px';
+        });
+    </script>
+<hr>
+<div id="div2">Press s-smile c-cry</div>
+<script>
+const divElement2=document.getElementById("div2");
+document.addEventListener("keydown",function(event){
+let reaction=" ";
+switch(event.key)
+{
+case "s":
+	reaction="😊";
+	break;
+case "c":
+	reaction="😭";
+	break;
+default:
+	reaction="Hey Pressed any valid key";
+	break;
+	}
+	
+	divElement2.textContent=reaction;
+			});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

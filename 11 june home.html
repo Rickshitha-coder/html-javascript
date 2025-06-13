@@ -1,0 +1,144 @@
+<!--Create a virtual DJ keyboard. When the user presses certain keys (like A, S, D, F), different 
+music clips or sound effects will play. Display the name of the sound being played. 
+Example: 
+1. Use keydown event listener. 
+2. Map specific keys (A, S, D, F) to specific audio files. 
+3. Display the name of the sound being played on screen.-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🎧 Beat Blast</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top, #1f1c2c, #928dab);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 20px 0;
+      text-shadow: 0 0 15px cyan;
+      color: cyan;
+    }
+
+    img {
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+
+    #div1 {
+      margin-top: 40px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      border: 2px solid #0ff;
+      text-align: left;
+      width: 400px;
+    }
+
+    #div1 h2 {
+      color: #0ff;
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+
+    #div1 h3 {
+      margin: 0 0 20px 0;
+      font-size: 1rem;
+      color: #fff;
+      font-weight: normal;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #bbb;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎵 Beat Blast DJ</h1>
+  <img src="https://static.vecteezy.com/system/resources/previews/034/339/512/non_2x/bgm-letter-logo-creative-design-bgm-unique-design-vector.jpg" height="300" alt="DJ Turntable">
+
+  <div id="div1">
+    <h2>Song Line:</h2><h3></h3>
+    <h2>Film:</h2><h3></h3>
+    <h2>Lyrics Writer:</h2><h3></h3>
+  </div>
+
+  <div class="note">Press A, S, D, or F to play a track 🎶</div>
+
+  <script>
+    const divElement = document.getElementById("div1");
+    let currentAudio = null;
+
+    document.addEventListener('keydown', function(event) {
+      let audio = '', bgmname = '', film = '', lyricsWriter = '';
+      switch (event.key.toLowerCase()) {
+        case 'a':
+          audio = "https://www.bgmringtones.com/wp-content/uploads/2024/05/Star-Kavin-Emotional-BGM.mp3";
+          bgmname = "STAR emotional BGM";
+          film = "STAR";
+          lyricsWriter = "Yuvan Shankar Raja";
+          break;
+        case 's':
+          audio = "https://www.bgmringtones.com/wp-content/uploads/2023/01/Pradeep-And-Nikitha-Reunited-BGM.mp3";
+          bgmname = "Nikita and Pradeep Reunited BGM";
+          film = "Love Today";
+          lyricsWriter = "Yuvan Shankar Raja";
+          break;
+        case 'd':
+          audio = "https://www.bgmringtones.com/wp-content/uploads/2024/12/Yedi-Enna-Bgm.mp3";
+          bgmname = "Yedi Enna BGM";
+          film = "Nilavuku Yanmela Ennadi Kobam";
+          lyricsWriter = "GV Prakash";
+          break;
+        case 'f':
+          audio = "https://www.bgmringtones.com/wp-content/uploads/2024/12/Edharkaga-Marubadi-Bgm.mp3";
+          bgmname = "Edhagaha Marubadi BGM";
+          film = "Retro";
+          lyricsWriter = "Dhanush";
+          break;
+        default:
+          // Stop audio and clear display on invalid key press
+          if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            currentAudio = null;
+          }
+          divElement.innerHTML =
+            "<h2>Song Line:</h2><h3></h3>" +
+            "<h2>Film:</h2><h3></h3>" +
+            "<h2>Lyrics Writer:</h2><h3></h3>";
+          return;
+      }
+
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      currentAudio = new Audio(audio);
+      currentAudio.play();
+
+      divElement.innerHTML =
+        "<h2>Song Line:</h2><h3>" +  bgmname + "</h3>" +
+        "<h2>Film:</h2><h3>" + film + "</h3>" +
+        "<h2>Lyrics Writer:</h2><h3>" + lyricsWriter + "</h3>";
+    });
+  </script>
+</body>
+</html>
+
+  

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML</title>
+	</head>
+<body>
+<h2>The getElementById Method</h2>
+<p>The most common way to access an HTML element is to use the id of the element.</p>
+<p id="p1">From the Paragraph - Find the HTML elements by ID</p> 
+<p id="p2"></p>
+<script>
+const value=document.getElementById("p1").innerHTML;
+document.getElementById("p2").innerHTML="The value of P1 is:"+value;
+</script>
+<hr>
+
+<h2>Get element by Tag Name</h2>
+<p>Finding HTML Elements by Tag Name.</p>
+<p>This example demonstrates the <b>getElementsByTagName</b> method.</p>
+<p>This example finds all p tag elements:</p>
+<div>HTML division</div>
+<p id="p3"></p>
+<p  id="p4"></p>
+<script>
+const element = document.getElementsByTagName("p");
+document.getElementById("p3").innerHTML = 'The text in first paragraph (index 3) is: ' + element[3].innerHTML;
+const divvalue=document.getElementsByTagName("div");
+document.getElementById("p4").innerHTML="The vlaue of div is: "+divvalue[0].innerHTML;
+</script>
+<hr>
+<h2> Query Selector</h2>
+<p id="p5">Hi</p>
+<div>Helllo</div>
+<script>
+const value1=document.querySelectorAll('p,div,h2');
+value1.forEach(v1=>{
+console.log(v1.textContent);});
+</script>
+<hr>
+<h2>Without For Each</h2>
+<cite>Output in console log</cite>
+<p id="p6"></p>
+<script>
+  const pElement = document.getElementsByTagName('p')[0];
+  const divElement = document.getElementsByTagName('div')[0];
+  const pText = pElement.textContent;
+  const divText = divElement.textContent;
+  console.log("Paragraph content: " + pText + "\nDiv content: " + divText);
+</script>
+<hr>
+<h2>Get Element by Class Name</h2>
+
+<p>Finding HTML Elements by Class Name.</p>
+<p class="intro">Hello World!</p>
+<p class="intro">This example demonstrates the <b>getElementsByClassName</b> method.</p>
+<p class="intro1">Hi</p>
+<p id="p7"></p>
+
+<script>
+const x = document.getElementsByClassName("intro");
+document.getElementById("p7").innerHTML = 
+'The first paragraph (index 0) with class="intro" is: ' + x[0].innerHTML;
+</script>
+<hr>
+<h2> Class Name by For Each</h2>
+<p id="p8"></p>
+<script>
+const value3=document.querySelectorAll('.intro, .intro1');
+value3.forEach(v3=>{
+console.log(v3.textContent);});
+</script>
+<hr>
+<h2>Changing HTML Style</h2>
+<p>To change the style of an HTML element, use this syntax:
+document.getElementById(id).style.property = new style</p>
+<p id="p9">Changing HTML style</p>
+<script>
+document.getElementById("p9").style.color="red";
+</script>
+<hr>
+
+<h2>Color Change when clicking the button</h2>
+<p id="p10">When click the button it  change the color</p>
+<button type="button" onclick="document.getElementById('p10').style.color='blue'";>See the clolor</button>
+<hr>
+<<div id="divId" style="width: 120px; height: 300px; border: 1px solid blue; display: flex; align-content: space-between; flex-direction: row;  flex-wrap: wrap;">
+  <div style="background-color: red;">Division 1</div>
+  <div style="background-color: yellow;">Division 2</div>
+  <div style="background-color: green;">Division 3</div>
+</div>
+
+<button type="button" onclick="align()">Click to See the Change</button>
+
+<script>
+function align() {
+  document.getElementById("divId").style.alignContent = "stretch"; //flex-end space-round space-between
+}
+</script>
+<hr>
+
+</body>
+</html>

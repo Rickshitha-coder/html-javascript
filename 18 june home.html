@@ -1,0 +1,166 @@
+<!--
+Date :  18-6-25 
+1. You are building a school dashboard where teachers can: 
+• Add new students with details 
+• Merge student profiles 
+• Access optional fields like guardian contact info safely 
+Use: 
+• spread to copy and merge student profiles 
+•  rest to collect multiple subjects and scores 
+• optional chaining to access deeply nested values safely -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>School Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4"><i class="bi bi-building"></i>  School Dashboard</h2>
+
+  <!-- Student Form -->
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white"><i class="bi bi-person-plus-fill"></i> Add Student</div>
+    <div class="card-body">
+      <form id="studentForm">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="studentName" placeholder="👨‍🎓 Student Name" required>
+          </div>
+          <div class="col-md-2">
+            <input type="text" class="form-control" id="studentClass" placeholder="🏷️ Class" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" id="guardianName" placeholder="👪 Guardian Name">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" id="guardianPhone" placeholder="📞 Guardian Phone">
+          </div>
+        </div>
+
+        <div class="row mt-3 g-3">
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="subjectList" placeholder="📚 Subjects with Scores (e.g., Math-90,Eng-85)">
+          </div>
+          <div class="col-md-6 d-grid">
+            <button type="submit" class="btn btn-success"><i class="bi bi-person-check-fill"></i> Add Student</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="d-flex gap-3 mb-3">
+    <button class="btn btn-info" onclick="mergeStudents()"><i class="bi bi-arrow-left-right"></i> Merge Sample Profiles</button>
+    <button class="btn btn-warning" onclick="viewGuardian()"><i class="bi bi-person-vcard"></i> View Guardian Info</button>
+	  <button class="btn btn-secondary" onclick="displayAllStudents()"><i class="bi bi-person"></i> All Students Info</button>
+  </div>
+
+  <!-- Output Display -->
+  <div class="card">
+    <div class="card-header bg-secondary text-white"><i class="bi bi-terminal"></i> Output</div>
+    <div class="card-body">
+      <pre id="output" class="text-dark"></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+  let studentList = [];
+  let sampleStudent = {  //A sample student to use during merging.
+    id: 2,
+    name: "Rohan",
+    class: "6A"
+  };
+
+  document.getElementById("studentForm").addEventListener("submit", function(e) {
+    e.preventDefault(); //Prevents the page from reloading when the form is submitted.
+
+    const name = document.getElementById("studentName").value;
+    const sclass = document.getElementById("studentClass").value;
+    const guardianName = document.getElementById("guardianName").value;
+    const guardianPhone = document.getElementById("guardianPhone").value;
+    const subjectInput = document.getElementById("subjectList").value;
+
+    const subjectArray = subjectInput.split(",").map(pair => {//split(",") breaks it into separate "Math-90" and "Eng-85" strings.
+      const [subject, score] = pair.trim().split("-");  //.trim().split("-") separates each into subject and score.
+      return { subject, score: Number(score) };  //Number(score) converts the score to a number.
+    });
+
+    const student = {
+      id: studentList.length + 1,
+      name: name,
+      class: sclass,
+      guardian: {
+        name: guardianName || undefined,
+        contact: {
+          phone: guardianPhone || undefined
+        }
+      },
+      subjects: [...subjectArray] //subjects stores the array of subject-score objects.
+    };
+
+    studentList.push(student);  //added the student  to the studentlist array
+
+    displayAllStudents(); // 🔄 Displays all students
+    this.reset(); //Clears the form after the student is added.
+  });
+
+  function mergeStudents() {
+    if (studentList.length === 0) {  //If no student has been added yet, show a message.
+      displayOutput("Please add at least one student first.");
+      return;
+    }
+
+    let mergedMessage = "🔀 Merged Profiles:\n";
+    studentList.forEach((student, index) => {
+      const merged = { ...sampleStudent, ...student }; // Merges sampleStudent with each student
+      mergedMessage += `\n🧾 Student ${index + 1}:\nID: ${merged.id}\nName: ${merged.name}\nClass: ${merged.class}\n`;
+    });
+
+    displayOutput(mergedMessage);
+  }
+
+  function viewGuardian() {
+    if (studentList.length === 0) {
+      displayOutput("Please add a student first.");
+      return;
+    }
+
+    let guardianDetails = "👨‍👩‍👧 Guardian Information:\n";
+    studentList.forEach((student, index) => {
+      const phone = student?.guardian?.contact?.phone ?? "Not Available"; //student?.guardian --> this checks if guardian exists inside student if doesn't means it shows not avaible same for next aslo
+      const name = student?.guardian?.name ?? "Not Available";  //student?.Guardian.name--> if the guardian name exista menas it shows the name otherwise it shows not availble
+      guardianDetails += `\n🧑‍🎓 Student ${index + 1}:\nGuardian Name: ${name}\nPhone: ${phone}\n`;
+    });
+
+    displayOutput(guardianDetails);
+  }
+
+  function displayAllStudents() {
+    let fullList = "📋 All Students:\n";
+
+    studentList.forEach(student => {
+      fullList += `\nID: ${student.id}\nName: ${student.name}\nClass: ${student.class}\n`;
+      fullList += `Guardian Name: ${student.guardian.name || "Not Provided"}\nGuardian Phone: ${student.guardian.contact.phone || "Not Provided"}\nSubjects:\n`;
+      student.subjects.forEach(s => {
+        fullList += `- ${s.subject}: ${s.score}\n`;
+      });
+    });
+
+    displayOutput(fullList);
+  }
+
+  function displayOutput(message) {
+    document.getElementById("output").textContent = message;
+  }
+</script>
+
+
+</body>
+</html>

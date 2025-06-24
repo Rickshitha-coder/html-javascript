@@ -1,0 +1,79 @@
+<!--<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+<meta charset="UTF-8">
+<title>List with AngularJS</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+<style>
+</style>
+</head>
+<body>
+<h2>List Exmaple using Angular JS</h2>
+	<div ng-init="BeautyProduct=['Lakme Matten Lipstick','MaybeLine Linear','Garnier Facwash','EyeLinear',' Kajal']">
+	<ul>
+		<li ng-repeat="bp in BeautyProduct">{{$index+1}}-{{bp}}</li>
+	</ul>
+	<p class="text-success m-3">Total Items in the list are:{{BeautyProduct.length}}</p>
+	</div>
+	<BR><br>
+	
+	
+</body>
+</html>
+-->
+
+<!--<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>List with AngularJS</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+<body>
+	<div class="text-danger m-3" ng-app="app1" ng-controller="c1">
+		{{firstName +" "+ lastname}}
+	</div>
+	<script>
+		var app=angular.module("app1",[]); //creates the module
+		app.controller("c1",function($scope){
+		$scope.firstName="Ricskhi";
+		$scope.lastname="AnandaKumar";
+		});
+		
+	</script>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>List with AngularJS</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+<body>
+	<div class="text-danger m-3" ng-app="app1" ng-controller="c1">
+	Frist Name :<input type="text" ng-model="firstName">
+	Last Name : <input type="text" ng-model="lastname">
+	<Br><Br>
+	<!--Full Name :	{{firstName +" "+ lastname}}   it is one method if we use function below line will be used-->
+	Full Name: {{fullName()}}
+	</div>
+	<script>
+		var app=angular.module("app1",[]); //creates the module
+		app.controller("c1",function($scope){
+		$scope.firstName="Ricskhi";
+		$scope.lastname="AnandaKumar";
+		
+		$scope.fullName =function(){
+		return $scope.firstName +" "+$scope.lastname;
+		};
+		});
+		
+	</script>
+</body>
+</html>

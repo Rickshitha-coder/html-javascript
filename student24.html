@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Page</title>
+
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f8ff, #e6f2ff);
+      padding: 30px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .department {
+      text-align: center;
+      font-size: 20px;
+      color: #8e44ad;
+      margin-bottom: 30px;
+    }
+
+    .msg {
+      text-align: center;
+      color: #006400;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 50%;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeInTable 1s ease-in-out;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr {
+      animation: fadeInRow 0.5s ease-in;
+    }
+
+    td i {
+      color: #7f8c8d;
+      margin-right: 8px;
+    }
+
+    /* Fade-in animation for table rows */
+    @keyframes fadeInRow {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInTable {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body ng-controller="c3">
+
+  <h1><i class="bi bi-person-lines-fill"></i> Student Page</h1>
+
+  <div class="department">
+    Department of B.Sc. Computer Science with AI (Batch: 2024–2027)
+  </div>
+
+  <p class="msg">{{display}}</p>
+
+  <table>
+    <tr>
+      <th>Register Number</th>
+      <th>Name</th>
+    </tr>
+    <tr ng-repeat="student in students">
+      <td>{{student.regno}}</td>
+      <td><i class="bi bi-person-circle"></i>{{student.name}}</td>
+    </tr>
+  </table>
+
+</body>
+</html>
